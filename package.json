@@ -1,19 +1,19 @@
 {
-  "name": "XE-Profiler",
+  "name": "RhymiX-Profiler",
   "version": "1.0.0",
-  "author": "NAVER",
+  "author": "NAVER, Rhymix",
   "keywords": [
-    "XpressEngine",
-    "XE",
+    "Rhymix",
+    "RX",
     "Profiler"
   ],
-  "license": "GNU LGPL",
+  "license": "GNU GPL v2",
   "repository": {
     "type": "git",
-    "url": "git://github.com/xpressengine/xe-module-profiler.git"
+    "url": "git://github.com/rhymix/rhymix-profiler.git"
   },
   "bugs": {
-    "url": "https://github.com/xpressengine/xe-module-profiler/issues"
+    "url": "https://github.com/rhymix/rhymix-profiler/issues"
   },
   "devDependencies": {
     "grunt": ">0.4.0",
