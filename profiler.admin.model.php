@@ -125,7 +125,7 @@ class profilerAdminModel extends profiler
 	 * @brief DB의 기록된 트리거 목록을 가져옴
 	 * @return array
 	 */
-	function getTriggers($trigger_name, $called_position)
+	function getTriggers($trigger_name = NULL, $called_position = NULL)
 	{
 		$triggers = false;
 		$oCacheHandler = CacheHandler::getInstance('object', NULL, TRUE);
@@ -292,6 +292,7 @@ class profilerAdminModel extends profiler
 		$addon_foreach = $oAddonAdminModel->getAddonList();
 		$oModuleModel = getModel('module');
 
+		$addon_list = array();
 		foreach($addon_foreach as $list)
 		{
 			$addon_list[] = $list->addon;

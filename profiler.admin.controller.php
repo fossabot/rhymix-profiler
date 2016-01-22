@@ -102,6 +102,7 @@ class profilerAdminController extends profiler
 		// 애드온 설정 삭제
 		foreach($invalid_addon_config as $addon_config)
 		{
+			$addon_name = new stdClass();
 			$addon_name->addon = $addon_config->addon;
 			$output = executeQuery('profiler.deleteAddonConfig', $addon_name);
 			if(!$output->toBool())
