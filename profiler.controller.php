@@ -23,6 +23,11 @@ class profilerController extends profiler
 		$oProfilerModel = getModel('profiler');
 		$config = $oProfilerModel->getConfig();
 
+		if(__LOG_SLOW_PROTECT__ === 1 &&  __LOG_SLOW_PROTECT_IP__ != $_SERVER['REMOTE_ADDR'])
+		{
+			return new Object();
+		}
+
 		// 슬로우 로그를 쓰지 않을경우 리턴
 		if($config->slowlog->enabled !== 'Y')
 		{
