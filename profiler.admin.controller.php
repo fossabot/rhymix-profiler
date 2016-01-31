@@ -21,6 +21,10 @@ class profilerAdminController extends profiler
 		$vars = Context::getRequestVars();
 
 		$config = $oProfilerModel->getConfig();
+		if(!$config)
+		{
+			$config = new stdClass();
+		}
 		if(!$config->slowlog)
 		{
 			$config->slowlog = new stdClass();

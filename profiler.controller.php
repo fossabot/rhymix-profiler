@@ -23,11 +23,6 @@ class profilerController extends profiler
 		$oProfilerModel = getModel('profiler');
 		$config = $oProfilerModel->getConfig();
 
-		if(__LOG_SLOW_PROTECT__ === 1 &&  __LOG_SLOW_PROTECT_IP__ != $_SERVER['REMOTE_ADDR'])
-		{
-			return new Object();
-		}
-
 		// 슬로우 로그를 쓰지 않을경우 리턴
 		if($config->slowlog->enabled !== 'Y')
 		{
@@ -79,6 +74,21 @@ class profilerController extends profiler
 		if(!$output->toBool())
 		{
 			return $output;
+		}
+	}
+
+	function triggerBeforeDisplay(&$output)
+	{
+		$logged_info = Context::get('logged_info');
+		//관리자 이외의 사람에게 노출 하지 않는다.
+		if($logged_info->is_admin != 'Y')
+		{
+			return new Object();
+		}
+		//모바일에서는 실행 시키지 않는다.
+		if(Mobile::isFromMobilePhone())
+		{
+			return new Object();
 		}
 	}
 }
