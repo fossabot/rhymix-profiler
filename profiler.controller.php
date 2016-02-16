@@ -18,7 +18,7 @@ class profilerController extends profiler
 	 * @param stdClass $args
 	 * @return mixed
 	 */
-	function triggerWriteSlowlog($args)
+	function triggerAfterDisplay()
 	{
 		$oProfilerModel = getModel('profiler');
 		$config = $oProfilerModel->getConfig();
@@ -29,66 +29,70 @@ class profilerController extends profiler
 			return new Object();
 		}
 
-		// 잘못된 인자 검사
-		if(!is_object($args))
+		$triggers = Rhymix\Framework\Debug::getSlowTriggers();
+
+		foreach($triggers as $val)
 		{
-			$args = new stdClass();
+			self::insertSlowLog($val);
 		}
 
-		if(($args->_log_type == 'trigger' || $args->_log_type == 'addon' || $args->_log_type == 'widget')
-			&& ($args->_elapsed_time < $config->slowlog->{'time_' . $args->_log_type}))
-		{
-			return new Object();
-		}
+		$widgets = Rhymix\Framework\Debug::getSlowWidgets();
 
+		foreach($widgets as $val)
+		{
+			self::insertSlowLog($val);
+		}
+	}
+
+	protected static function insertSlowLog($val)
+	{
 		// hash id 생성
-		$type_hash_id = md5($args->caller . '@' . $args->called);
+		if($val->type == 'trigger')
+		{
+			$type_hash_id = md5($val->trigger_name . '@' . $val->trigger_target);
+			$caller = $val->trigger_name;
+			$called = $val->trigger_target;
+			$called_extension = $val->trigger_plugin;
+			$slow_time = $val->trigger_time;
+		}
+		else
+		{
+			$caller = 'widget.execute';
+			$type_hash_id = md5($caller . '@' . $val->widget_name);
+			$called = $val->widget_name;
+			$called_extension = $val->widget_name;
+			$slow_time = $val->widget_time;
+		}
 
-		// type에 등록되어 있는지 확인
-		$cond = new stdClass();
-		$cond->hash_id = $type_hash_id;
-		$output = executeQuery('profiler.getSlowlogType', $cond);
+		// type 에 등록 여부 확인
+		$hash_args = new stdClass();
+		$hash_args->hash_id = $type_hash_id;
+		$output = executeQuery('profiler.getSlowlogType', $hash_args);
 
-		// type에 등록되어 있지 않으면 추가
+		// type 등록이 안되어있으면 등록
 		if(!$output->data)
 		{
 			$slowlog_type = new stdClass();
-			$slowlog_type->type = $args->_log_type;
+			$slowlog_type->type = $val->type;
 			$slowlog_type->hash_id = $type_hash_id;
-			$slowlog_type->caller = $args->caller;
-			$slowlog_type->called = $args->called;
-			$slowlog_type->called_extension = $args->called_extension;
-			$output = executeQuery('profiler.insertSlowlogType', $slowlog_type);
-			if(!$output->toBool())
+			$slowlog_type->caller = $caller;
+			$slowlog_type->called = $called;
+			$slowlog_type->colled_extension = $called_extension;
+			$output_type = executeQuery('profiler.insertSlowlogType', $slowlog_type);
+			if(!$output_type->toBool())
 			{
 				return $output;
 			}
 		}
 
-		// 수행 시간을 기록
 		$slowlog = new stdClass();
 		$slowlog->type_hash_id = $type_hash_id;
-		$slowlog->elapsed_time = $args->_elapsed_time;
+		$slowlog->elapsed_time = $slow_time;
 		$slowlog->logged_timestamp = time();
-		$output = executeQuery('profiler.insertSlowlog', $slowlog);
-		if(!$output->toBool())
+		$output_log = executeQuery('profiler.insertSlowlog', $slowlog);
+		if(!$output_log->toBool())
 		{
 			return $output;
-		}
-	}
-
-	function triggerBeforeDisplay(&$output)
-	{
-		$logged_info = Context::get('logged_info');
-		//관리자 이외의 사람에게 노출 하지 않는다.
-		if($logged_info->is_admin != 'Y')
-		{
-			return new Object();
-		}
-		//모바일에서는 실행 시키지 않는다.
-		if(Mobile::isFromMobilePhone())
-		{
-			return new Object();
 		}
 	}
 }

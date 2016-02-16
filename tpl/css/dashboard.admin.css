@@ -2,7 +2,7 @@
 /* Copyright (C) NAVER <http://www.navercorp.com> */
 
 #slowlog-trigger-graph,
-#slowlog-addon-graph {
+#slowlog-widget-graph {
 	height: 300px;
 }
 .transition {

@@ -58,7 +58,7 @@ jQuery(function($) {
 			pointFormat: "{series.name}: <strong>{point.y:.2f}" + xe.lang.unit_sec + "</strong>"
 		}
 	});
-	$("#slowlog-addon-graph").highcharts({
+	$("#slowlog-widget-graph").highcharts({
 		chart: {
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
@@ -84,10 +84,10 @@ jQuery(function($) {
 		series: [{
 			type: "pie",
 			name: xe.lang.cmd_profiler_runtime,
-			data: profiler.agd
+			data: profiler.wgd
 		}],
 		title: {
-			text: xe.lang.profiler_unit.addon
+			text: xe.lang.profiler_unit.widget
 		},
 		tooltip: {
 			pointFormat: "{series.name}: <strong>{point.y:.2f}" + xe.lang.unit_sec + "</strong>"
@@ -123,41 +123,6 @@ jQuery(function($) {
 		}],
 		title: {
 			text: xe.lang.profiler_unit.trigger
-		},
-		tooltip: {
-			pointFormat: "{series.name}: <strong>{point.y:.2f}" + xe.lang.unit_sec + "</strong>"
-		}
-	});
-	$('#slowlog-sub-addon-graph').highcharts({
-		chart: {
-			plotBackgroundColor: null,
-			plotBorderWidth: null,
-			plotShadow: false
-		},
-		exporting: {
-			buttons: {
-				contextButton: {
-					enabled: false
-				}
-			}
-		},
-		plotOptions: {
-			pie: {
-				allowPointSelect: true,
-				cursor: "pointer",
-				dataLabels: {
-					enabled: false,
-				},
-				showInLegend: false
-			}
-		},
-		series: [{
-			type: "pie",
-			name: xe.lang.cmd_profiler_runtime,
-			data: profiler.agd
-		}],
-		title: {
-			text: xe.lang.profiler_unit.addon
 		},
 		tooltip: {
 			pointFormat: "{series.name}: <strong>{point.y:.2f}" + xe.lang.unit_sec + "</strong>"

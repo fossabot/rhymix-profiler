@@ -17,10 +17,10 @@ class profilerAdminView extends profiler
 	function dispProfilerAdminDashboard()
 	{
 		$oProfilerAdminModel = getAdminModel('profiler');
-		$a_slowlog = $oProfilerAdminModel->getStaticsSlowlog('addon');
+		$w_slowlog = $oProfilerAdminModel->getStaticsSlowlog('widget');
 		$t_slowlog = $oProfilerAdminModel->getStaticsSlowlog('trigger');
 
-		Context::set('a_slowlog', $a_slowlog);
+		Context::set('w_slowlog', $w_slowlog);
 		Context::set('t_slowlog', $t_slowlog);
 	}
 
@@ -48,25 +48,6 @@ class profilerAdminView extends profiler
 		Context::set('page_navigation', $paging->page_navigation);
 
 		Context::set('t_slowlog', $t_slowlog2);
-	}
-
-	function dispProfilerAdminAddonList()
-	{
-		$oProfilerAdminModel = getAdminModel('profiler');
-		$output = $oProfilerAdminModel->getStaticsSlowlog('addon');
-		$a_slowlog = $output->data;
-
-		$output2 = $oProfilerAdminModel->getStaticsSlowlogCount('addon', '5');
-		$a_slowlog2 = $output2->data;
-		$paging = $oProfilerAdminModel->getPageNavigation($a_slowlog, Context::get('page'));
-
-		Context::set('total_count', $paging->total_count);
-		Context::set('total_page', $paging->total_page);
-		Context::set('page', $paging->page);
-		Context::set('addon_slowlog', $paging->data);
-		Context::set('page_navigation', $paging->page_navigation);
-
-		Context::set('a_slowlog', $a_slowlog2);
 	}
 
 	function dispProfilerAdminWidgetList()

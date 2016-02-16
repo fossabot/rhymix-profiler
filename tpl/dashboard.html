@@ -9,20 +9,20 @@
 (function(global, $) {
 	var profiler = global.profiler = {},
 		tgd = profiler.tgd = [],
-		agd = profiler.agd = [],
+		wgd = profiler.wgd = [],
 		lang = {
 			unit_sec: "{$lang->unit_sec}",
 			profiler_unit: {
 				trigger: "{$lang->profiler_unit->trigger}",
-				addon: "{$lang->profiler_unit->addon}"
+				widget: "{$lang->profiler_unit->widget}"
 			},
 			cmd_profiler_runtime: "{$lang->cmd_profiler_runtime}"
 		}
 	<!--@foreach($t_slowlog->data as $log)-->
 		tgd.push(["{$log->called}", {$log->avg_time}]);
 	<!--@end-->
-	<!--@foreach($a_slowlog->data as $log)-->
-		agd.push(["{$log->called}", {$log->avg_time}]);
+	<!--@foreach($w_slowlog->data as $log)-->
+		wgd.push(["{$log->called}", {$log->avg_time}]);
 	<!--@end-->
 	$.extend(global.xe.lang, lang);
 })(this, jQuery);
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="x_span4">
-		<div id="slowlog-addon-graph">
+		<div id="slowlog-widget-graph">
 		</div>
 	</div>
 	<div class="x_span4">
