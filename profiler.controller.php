@@ -77,7 +77,7 @@ class profilerController extends profiler
 			$slowlog_type->hash_id = $type_hash_id;
 			$slowlog_type->caller = $caller;
 			$slowlog_type->called = $called;
-			$slowlog_type->colled_extension = $called_extension;
+			$slowlog_type->called_extension = $called_extension;
 			$output_type = executeQuery('profiler.insertSlowlogType', $slowlog_type);
 			if(!$output_type->toBool())
 			{
