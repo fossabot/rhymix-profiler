@@ -29,6 +29,9 @@ class profilerController extends profiler
 			return new Object();
 		}
 
+		$oDB = DB::getInstance();
+
+		$oDB->begin();
 		$triggers = Rhymix\Framework\Debug::getSlowTriggers();
 
 		foreach($triggers as $val)
@@ -42,6 +45,7 @@ class profilerController extends profiler
 		{
 			self::insertSlowLog($val);
 		}
+		$oDB->commit();
 	}
 
 	protected static function insertSlowLog($val)
