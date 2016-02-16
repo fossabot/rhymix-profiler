@@ -45,6 +45,7 @@ class profilerController extends profiler
 		{
 			self::insertSlowLog($val);
 		}
+
 		$oDB->commit();
 	}
 
@@ -85,7 +86,7 @@ class profilerController extends profiler
 			$output_type = executeQuery('profiler.insertSlowlogType', $slowlog_type);
 			if(!$output_type->toBool())
 			{
-				return $output;
+				return $output_type;
 			}
 		}
 
@@ -96,7 +97,7 @@ class profilerController extends profiler
 		$output_log = executeQuery('profiler.insertSlowlog', $slowlog);
 		if(!$output_log->toBool())
 		{
-			return $output;
+			return $output_log;
 		}
 	}
 }
