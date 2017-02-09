@@ -52,7 +52,7 @@ class profilerController extends profiler
 	protected static function insertSlowLog($val)
 	{
 		// hash id 생성
-		if($val->type == 'trigger')
+		if($val->type == 'Trigger')
 		{
 			$type_hash_id = md5($val->trigger_name . '@' . $val->trigger_target);
 			$caller = $val->trigger_name;
