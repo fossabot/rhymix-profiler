@@ -6,11 +6,11 @@
 
 ## Maintainers
 
-@qw5414
+@BJRambo
 
 ### 설치환경
-- PHP 5.3 이상(PHP 5.5 이상 권장, PHP7 지원예정)
-- MYSQL4.1 이상 (MYSQL 5.0 이상 또는 MariaDB 권장)
+- PHP 7.0 이상(PHP 5.5 이상 권장, PHP7 지원예정)
+- MYSQL5.0 이상
 - 필수 사항 (RhymiX 코어)
 
 ### 개발 참여
@@ -18,8 +18,8 @@ RhymiX-profiler 는 개발자, 디자이너, 번역가 등의 도움과 일반 �
 
 ### 공식 홈페이지
 
-- XETOWN : https://www.xetown.com
 - RhymiX : https://www.rhymix.org
+- XETOWN : https://www.xetown.com
 
 ### 저작권 및 라이선스
 
