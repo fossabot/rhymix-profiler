@@ -1,4 +1,5 @@
 [![RhymiX Profiler](https://cloud.githubusercontent.com/assets/8565457/12227560/ba15b514-b871-11e5-802a-d5e88db2e393.png)](https://www.rhymix.org)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frx-public%2Frhymix-profiler.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Frx-public%2Frhymix-profiler?ref=badge_shield)
 =====================
 
 ### 개요
@@ -44,3 +45,7 @@ GPL은 WordPress, Drupal, Joomla 등 세계적인 CMS들이 공통으로 채택�
 RhymiX Profiler의 소스코드를 수정하거나 확장 기능을 직접 개발하여 사용하더라도 마찬가지입니다.
 그러나 직접 개발한 확장 기능을 제3자에게 배포 또는 판매할 경우에는 반드시 소스코드를 제공해야 하며,
 이러한 소스코드는 모두 GPL 라이선스의 적용을 받습니다.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frx-public%2Frhymix-profiler.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frx-public%2Frhymix-profiler?ref=badge_large)
